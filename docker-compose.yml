@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   searcher:
     build: .
@@ -17,4 +15,4 @@ services:
       - HEADLESS=true
       - BROWSER_TYPE=chrome
       - LOG_LEVEL=INFO
-    command: --keyword "mixture of experts" --results 20 --year-from 2024 --year-to 2025 --max-pages 20 --output /app/output/mixture_of_experts_results.json
+    command: --keyword "Optimizer" --results 10 --max-pages 10 --output /app/output/Optimizer.json
