@@ -1,0 +1,192 @@
+[
+  {
+    "title": "Principles of artificial intelligence",
+    "url": "https://books.google.com/books?hl=en&lr=&id=mT-jBQAAQBAJ&oi=fnd&pg=PP1&dq=artificial+intelligence&ots=hNZl8N5Adq&sig=RLcutY9OrSDKW4p2sScYNAd9-A0",
+    "abstract": "… Although certain topics treated in my previous book, Problemsolving Methods in Artificial Intelligence, are covered here as well, this book contains many additional topics such as rule-…",
+    "authors": [
+      {
+        "name": "NJ Nilsson",
+        "profile_url": null
+      }
+    ],
+    "venue": "2014",
+    "publication_year": 2014,
+    "citation_count": 9603,
+    "pdf_url": "https://stacks.stanford.edu/file/druid:zd294jv9941/zd294jv9941.pdf"
+  },
+  {
+    "title": "Artificial Intelligence Through",
+    "url": "https://books.google.com/books?hl=en&lr=&id=TKg8EQAAQBAJ&oi=fnd&pg=PA227&dq=artificial+intelligence&ots=hPDKyPvSv2&sig=mWfDTG096o0Nc1FNB-DETO_Tfek",
+    "abstract": "… , including artificial intelligence. At that time, artificial intelligence primarily concerned heuristic … He viewed intelligence in terms of adaptive behavior, and suggested that instead of …",
+    "authors": [
+      {
+        "name": "LJ Fogel",
+        "profile_url": null
+      },
+      {
+        "name": "AJ Owens",
+        "profile_url": null
+      },
+      {
+        "name": "MJ Walsh",
+        "profile_url": null
+      }
+    ],
+    "venue": "1966",
+    "publication_year": 1966,
+    "citation_count": 6171,
+    "pdf_url": null
+  },
+  {
+    "title": "The quest for artificial intelligence",
+    "url": "https://books.google.com/books?hl=en&lr=&id=nUJdAAAAQBAJ&oi=fnd&pg=PT7&dq=artificial+intelligence&ots=2nJ3zUhiSL&sig=43nn71EC9YhPeowneStmofsGbP4",
+    "abstract": "… He then spent twenty-three years at the Artificial Intelligence … courses in artificial intelligence and machine learning, and … Artificial Intelligence and the Journal of Artificial Intelligence …",
+    "authors": [
+      {
+        "name": "NJ Nilsson",
+        "profile_url": null
+      }
+    ],
+    "venue": "2009",
+    "publication_year": 2009,
+    "citation_count": 2242,
+    "pdf_url": "https://www.academia.edu/download/34400536/ai.pdf"
+  },
+  {
+    "title": "Causability and explainability of artificial intelligence in medicine",
+    "url": "https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/widm.1312",
+    "abstract": "Explainable artificial intelligence (AI) is attracting much interest in medicine. Technically, the problem of explainability is as old as AI itself and classic AI represented comprehensible …",
+    "authors": [
+      {
+        "name": "A Holzinger",
+        "profile_url": null
+      },
+      {
+        "name": "G Langs",
+        "profile_url": null
+      },
+      {
+        "name": "H Denk…",
+        "profile_url": null
+      }
+    ],
+    "venue": "… Reviews: Data Mining …, 2019",
+    "publication_year": 2019,
+    "citation_count": 1687,
+    "pdf_url": "https://wires.onlinelibrary.wiley.com/doi/pdf/10.1002/widm.1312"
+  },
+  {
+    "title": "Artificial intelligence in medicine",
+    "url": "https://link.springer.com/content/pdf/10.1007/978-3-319-19551-3.pdf",
+    "abstract": "The European Society for Artificial Intelligence in Medicine (AIME) was established in 1986 following a very successful workshop held in Pavia, Italy, the year before. The principal aims …",
+    "authors": [
+      {
+        "name": "J Holmes",
+        "profile_url": null
+      },
+      {
+        "name": "L Sacchi",
+        "profile_url": null
+      },
+      {
+        "name": "R Bellazzi",
+        "profile_url": null
+      }
+    ],
+    "venue": "Ann R Coll Surg Engl, 2004",
+    "publication_year": 2004,
+    "citation_count": 1386,
+    "pdf_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1964229/pdf/15333167.pdf"
+  },
+  {
+    "title": "Introduction to artificial intelligence",
+    "url": "https://books.google.com/books?hl=en&lr=&id=O7kfEQAAQBAJ&oi=fnd&pg=PR5&dq=artificial+intelligence&ots=JnAIGzxjg-&sig=JwDMCtI2zRLpZSGWZLmaGqrQBrs",
+    "abstract": "… during your studies this book will help you share my fascination with Artificial Intelligence. … philosophical questions surrounding intelligence and artificial intelligence. We humans have …",
+    "authors": [
+      {
+        "name": "W Ertel",
+        "profile_url": null
+      }
+    ],
+    "venue": "2024",
+    "publication_year": 2024,
+    "citation_count": 1113,
+    "pdf_url": "https://thuvienso.hoasen.edu.vn/bitstream/handle/123456789/10507/Contents.pdf?sequence=1&isAllowed=y"
+  },
+  {
+    "title": "Quo vadis artificial intelligence?",
+    "url": "https://link.springer.com/article/10.1007/s44163-022-00022-8",
+    "abstract": "… intelligence into machines, which constitutes the original motivation of Artificial Intelligence (AI). … There are many definitions of artificial intelligence. In the Turing test, AI is defined as the …",
+    "authors": [
+      {
+        "name": "Y Jiang",
+        "profile_url": null
+      },
+      {
+        "name": "X Li",
+        "profile_url": null
+      },
+      {
+        "name": "H Luo",
+        "profile_url": null
+      },
+      {
+        "name": "S Yin",
+        "profile_url": null
+      },
+      {
+        "name": "O Kaynak",
+        "profile_url": null
+      }
+    ],
+    "venue": "Discover Artificial Intelligence, 2022",
+    "publication_year": 2022,
+    "citation_count": 520,
+    "pdf_url": "https://link.springer.com/content/pdf/10.1007/s44163-022-00022-8.pdf"
+  },
+  {
+    "title": "What is artificial intelligence?",
+    "url": "https://link.springer.com/content/pdf/10.1007/978-94-009-1900-6_1?pdf=chapter%20toc",
+    "abstract": "One of the fascinating aspects of the field of artificial intelligence (AI) is that the precise nature of its subject matter turns out to be surprisingly difficult to define. The problem, of course, …",
+    "authors": [
+      {
+        "name": "JH Fetzer",
+        "profile_url": null
+      }
+    ],
+    "venue": "Artificial intelligence: Its scope and limits, 1990",
+    "publication_year": 1990,
+    "citation_count": 477,
+    "pdf_url": null
+  },
+  {
+    "title": "Artificial intelligence and medicine",
+    "url": "https://www.taylorfrancis.com/chapters/edit/10.4324/9780429052071-1/artificial-intelligence-medicine-peter-szolovits",
+    "abstract": "… This book is ~n introduction to the field of Artificial Intelligence in Medicine, (abbreviated AIM… some of the fundamental ideas of artificial intelligence, briefly describes the current state of …",
+    "authors": [
+      {
+        "name": "P Szolovits",
+        "profile_url": null
+      }
+    ],
+    "venue": "Artificial intelligence in medicine, 2019",
+    "publication_year": 2019,
+    "citation_count": 470,
+    "pdf_url": null
+  },
+  {
+    "title": "Artificial intelligence",
+    "url": "https://books.google.com/books?hl=en&lr=&id=9y2jBQAAQBAJ&oi=fnd&pg=PP1&dq=artificial+intelligence&ots=uQVzVpaVyB&sig=-DeuQEANbAzlTmXOj1Kx57Y-wgU",
+    "abstract": "Artificial Intelligence provides information pertinent to the fundamental aspects of artificial intelligence. This book presents the basic mathematical and computational approaches to …",
+    "authors": [
+      {
+        "name": "EB Hunt",
+        "profile_url": null
+      }
+    ],
+    "venue": "2014",
+    "publication_year": 2014,
+    "citation_count": 449,
+    "pdf_url": null
+  }
+]

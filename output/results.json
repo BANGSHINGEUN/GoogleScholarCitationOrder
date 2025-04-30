@@ -1,0 +1,216 @@
+[
+  {
+    "title": "Machine learning: Trends, perspectives, and prospects",
+    "url": "https://www.science.org/doi/abs/10.1126/science.aaa8415",
+    "abstract": "… Machine learning addresses the question of how to build computers that improve … Recent progress in machine learning has been driven both by the development of new learning …",
+    "authors": [
+      {
+        "name": "MI Jordan",
+        "profile_url": null
+      },
+      {
+        "name": "TM Mitchell",
+        "profile_url": null
+      }
+    ],
+    "venue": "Science, 2015",
+    "publication_year": 2015,
+    "citation_count": 11305,
+    "pdf_url": "https://www.science.org/doi/pdf/10.1126/science.aaa8415"
+  },
+  {
+    "title": "Machine learning algorithms-a review",
+    "url": "https://www.researchgate.net/profile/Batta-Mahesh/publication/344717762_Machine_Learning_Algorithms_-A_Review/links/5f8b2365299bf1b53e2d243a/Machine-Learning-Algorithms-A-Review.pdf?eid=5082902844932096t",
+    "abstract": "… Here‟sa quick look at some of the commonly used algorithms in machine learning (ML) Supervised Learning Supervised learning is the machine learning task of learning a function …",
+    "authors": [
+      {
+        "name": "B Mahesh",
+        "profile_url": null
+      }
+    ],
+    "venue": "International Journal of Science and Research …, 2020",
+    "publication_year": 2020,
+    "citation_count": 3458,
+    "pdf_url": "https://www.researchgate.net/profile/Batta-Mahesh/publication/344717762_Machine_Learning_Algorithms_-A_Review/links/5f8b2365299bf1b53e2d243a/Machine-Learning-Algorithms-A-Review.pdf?eid=5082902844932096t"
+  },
+  {
+    "title": "Machine learning",
+    "url": "https://books.google.com/books?hl=en&lr=&id=ctM-EAAAQBAJ&oi=fnd&pg=PR6&dq=machine+learning&ots=o_MnS7Vw1r&sig=n2CvZyPN9B0LsDlVINbc4zUknV0",
+    "abstract": "… from data is called learning or training. The … machine learning is to find or approximate ground-truth. In this book, models are sometimes called learners, which are machine learning …",
+    "authors": [
+      {
+        "name": "ZH Zhou",
+        "profile_url": null
+      }
+    ],
+    "venue": "2021",
+    "publication_year": 2021,
+    "citation_count": 3034,
+    "pdf_url": "https://courses.cs.washington.edu/courses/cse160/18sp/sections/09/MachineLearning.pdf"
+  },
+  {
+    "title": "Machine learning and the physical sciences",
+    "url": "https://journals.aps.org/rmp/abstract/10.1103/RevModPhys.91.045002",
+    "abstract": "… II, where the interaction with machine learning has a long history, drawing on methods in … in machine learning. We then turn the wheel in the other direction of using machine learning for …",
+    "authors": [
+      {
+        "name": "G Carleo",
+        "profile_url": null
+      },
+      {
+        "name": "I Cirac",
+        "profile_url": null
+      },
+      {
+        "name": "K Cranmer",
+        "profile_url": null
+      },
+      {
+        "name": "L Daudet",
+        "profile_url": null
+      },
+      {
+        "name": "M Schuld…",
+        "profile_url": null
+      }
+    ],
+    "venue": "Reviews of Modern …, 2019",
+    "publication_year": 2019,
+    "citation_count": 2639,
+    "pdf_url": "https://link.aps.org/pdf/10.1103/RevModPhys.91.045002"
+  },
+  {
+    "title": "Encyclopedia of machine learning",
+    "url": "https://books.google.com/books?hl=en&lr=&id=i8hQhp1a62UC&oi=fnd&pg=PA3&dq=machine+learning&ots=92mdwxhEbQ&sig=EyjvfNt6qgpz_RHzan2ilgiteyE",
+    "abstract": "… Machine Learning came to be identified as a research field in its … machine learning appeared. Although the field coalesced in the 1980s, research on what we now call machine learning …",
+    "authors": [
+      {
+        "name": "C Sammut",
+        "profile_url": null
+      },
+      {
+        "name": "GI Webb",
+        "profile_url": null
+      }
+    ],
+    "venue": "2011",
+    "publication_year": 2011,
+    "citation_count": 2454,
+    "pdf_url": null
+  },
+  {
+    "title": "International conference on machine learning",
+    "url": "https://par.nsf.gov/servlets/purl/10418406",
+    "abstract": "In this paper, we make the key delineation on the roles of resolution and statistical uncertainty in hierarchical bandits-based black-box optimization algorithms, guiding a more general …",
+    "authors": [
+      {
+        "name": "W Li",
+        "profile_url": null
+      },
+      {
+        "name": "C Wang",
+        "profile_url": null
+      },
+      {
+        "name": "G Cheng",
+        "profile_url": null
+      },
+      {
+        "name": "Q Song",
+        "profile_url": null
+      }
+    ],
+    "venue": "Transactions on machine learning …, 2023",
+    "publication_year": 2023,
+    "citation_count": 2424,
+    "pdf_url": "https://par.nsf.gov/servlets/purl/10418406"
+  },
+  {
+    "title": "Machine learning basics",
+    "url": "http://whdeng.cn/Teaching/PPT_01_Machine%20learning%20Basics.pdf",
+    "abstract": "… To obtain theoretical guarantees about generalization of a machine learning algorithm, we … Why does deep learning have different behavior than other machine learning methods for …",
+    "authors": [
+      {
+        "name": "H Wang",
+        "profile_url": null
+      },
+      {
+        "name": "Z Lei",
+        "profile_url": null
+      },
+      {
+        "name": "X Zhang",
+        "profile_url": null
+      },
+      {
+        "name": "B Zhou",
+        "profile_url": null
+      },
+      {
+        "name": "J Peng",
+        "profile_url": null
+      }
+    ],
+    "venue": "Deep learning, 2016",
+    "publication_year": 2016,
+    "citation_count": 1923,
+    "pdf_url": "http://whdeng.cn/Teaching/PPT_01_Machine%20learning%20Basics.pdf"
+  },
+  {
+    "title": "What is machine learning?",
+    "url": "https://link.springer.com/chapter/10.1007/978-3-319-18305-3_1",
+    "abstract": "… A machine learning algorithm is a computational process that … This training is the “learning” part of machine learning. The … can practice “lifelong” learning as it processes new data and …",
+    "authors": [
+      {
+        "name": "I El Naqa",
+        "profile_url": null
+      },
+      {
+        "name": "MJ Murphy",
+        "profile_url": null
+      }
+    ],
+    "venue": "Machine learning in radiation oncology: theory and …, 2015",
+    "publication_year": 2015,
+    "citation_count": 1745,
+    "pdf_url": "http://vision.uamt.feec.vutbr.cz/ROZ/lectures/Machine%20Learning%20in%20Computer%20Vision%20(F.F.%20Li,%20Stanford).pdf"
+  },
+  {
+    "title": "Optimization for machine learning",
+    "url": "https://books.google.com/books?hl=en&lr=&id=PNTxCwAAQBAJ&oi=fnd&pg=PR5&dq=machine+learning&ots=VZnvo2sr1_&sig=ufFXPaMo5mFA0Z4TolubRJcZlNE",
+    "abstract": "… The intersection of interests between machine learning and … workshops on Optimization and Machine Learning, held at the … who introduced him to machine learning, especially Partha …",
+    "authors": [
+      {
+        "name": "S Sra",
+        "profile_url": null
+      },
+      {
+        "name": "S Nowozin",
+        "profile_url": null
+      },
+      {
+        "name": "SJ Wright",
+        "profile_url": null
+      }
+    ],
+    "venue": "2011",
+    "publication_year": 2011,
+    "citation_count": 1060,
+    "pdf_url": "https://optml.mit.edu/teach/6881/lect7.pdf"
+  },
+  {
+    "title": "Machine learning and law: An overview",
+    "url": "https://www.elgaronline.com/abstract/edcoll/9781788972819/9781788972819.00014.xml",
+    "abstract": "… , machine learning has only recently started to develop. This chapter explores machine learning’s … The first section describes what machine learning is, highlighting its central principles. …",
+    "authors": [
+      {
+        "name": "H Surden",
+        "profile_url": null
+      }
+    ],
+    "venue": "Research handbook on big data law, 2021",
+    "publication_year": 2021,
+    "citation_count": 977,
+    "pdf_url": "https://papers.ssrn.com/sol3/Delivery.cfm?abstractid=2417415"
+  }
+]
