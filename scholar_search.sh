@@ -12,6 +12,7 @@ function display_help {
     echo "Options:"
     echo "  -k, --keyword KEYWORD    Search keyword (required)"
     echo "  -n, --results NUMBER     Number of results (default: 10)"
+    echo "  -p, --max-pages NUMBER   Maximum pages to crawl (default: 100)"
     echo "  -f, --year-from YEAR     Start year for filtering"
     echo "  -t, --year-to YEAR       End year for filtering"
     echo "  -c, --min-citations NUM  Minimum citation count"
@@ -20,7 +21,7 @@ function display_help {
     echo "  -h, --help               Display this help message"
     echo ""
     echo "Example:"
-    echo "  $0 -k \"machine learning\" -n 20 -o results.json"
+    echo "  $0 -k \"machine learning\" -n 20 -p 50 -o results.json"
     echo ""
 }
 
@@ -43,6 +44,10 @@ while (( "$#" )); do
             ;;
         -n|--results)
             RESULTS="$2"
+            shift 2
+            ;;
+        -p|--max-pages)
+            MAX_PAGES="$2"
             shift 2
             ;;
         -f|--year-from)
@@ -95,6 +100,10 @@ DOCKER_CMD="$DOCKER_CMD --keyword \"$KEYWORD\""
 # Add optional parameters
 if [ ! -z "$RESULTS" ]; then
     DOCKER_CMD="$DOCKER_CMD --results $RESULTS"
+fi
+
+if [ ! -z "$MAX_PAGES" ]; then
+    DOCKER_CMD="$DOCKER_CMD --max-pages $MAX_PAGES"
 fi
 
 if [ ! -z "$YEAR_FROM" ]; then
