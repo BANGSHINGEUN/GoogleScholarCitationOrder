@@ -290,6 +290,81 @@ LOG_FILE=logs/scholar.log
 - 연구 및 개인 용도로만 사용하세요.
 - Google의 서비스 약관을 준수하세요.
 
+## 11. 고급 키워드 검색 방법
+
+Google Scholar는 다양한 검색 구문을 지원합니다. 이 도구에서도 Google Scholar에서 지원하는 모든 검색 구문을 활용할 수 있습니다.
+
+### 기본 검색
+
+```bash
+# 기본 검색 - 단일 키워드
+./scholar_search.sh -k "robotics"
+
+# 공백으로 구분된 여러 키워드 (모든 단어 포함 검색)
+./scholar_search.sh -k "machine learning algorithms"
+```
+
+### 정확한 구문 검색
+
+```bash
+# 정확한 구문 일치 검색 (따옴표 사용)
+./scholar_search.sh -k "\"natural language processing\""
+
+# 제목에서만 검색 (intitle: 사용)
+./scholar_search.sh -k "intitle:\"quantum computing\""
+```
+
+### 불리언 연산자 사용
+
+```bash
+# OR 연산자 - 두 키워드 중 하나 이상 포함
+./scholar_search.sh -k "\"machine learning\" OR \"deep learning\""
+
+# AND 연산자 - 기본적으로 적용됨
+./scholar_search.sh -k "transformer attention mechanism"
+
+# 제외 검색 - 특정 키워드 제외
+./scholar_search.sh -k "deep learning -supervised"
+```
+
+### 저자 및 출판 기반 검색
+
+```bash
+# 특정 저자 검색
+./scholar_search.sh -k "author:\"Andrew Ng\""
+
+# 특정 저널/컨퍼런스 검색
+./scholar_search.sh -k "source:\"CVPR\""
+
+# 저자와 키워드 조합
+./scholar_search.sh -k "author:\"Yann LeCun\" convolutional networks"
+```
+
+### 고급 조합 검색
+
+```bash
+# 여러 조건 조합
+./scholar_search.sh -k "\"generative adversarial networks\" -\"conditional\" author:\"Ian Goodfellow\""
+
+# 특정 시간 범위와 키워드 조합 (명령줄 인수 사용)
+./scholar_search.sh -k "\"transformer models\"" -f 2017 -t 2023
+
+# 특정 인용 수 이상 필터링
+./scholar_search.sh -k "\"BERT\" source:\"ACL\"" -c 1000
+```
+
+### 파일 유형 및 특수 검색
+
+```bash
+# PDF 파일 검색
+./scholar_search.sh -k "filetype:pdf \"weather forecasting\""
+
+# 여러 키워드와 파일 유형 조합
+./scholar_search.sh -k "\"climate change\" impact agriculture filetype:pdf"
+```
+
+이러한 검색 구문을 조합하여 더 정확하고 세부적인 검색을 수행할 수 있습니다. Google Scholar의 모든 검색 연산자는 이 도구에서도 동일하게 작동합니다.
+
 ## 라이선스
 
 MIT License 
