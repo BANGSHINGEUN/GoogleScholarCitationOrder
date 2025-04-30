@@ -1,5 +1,6 @@
 import time
 import json
+import random
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -66,6 +67,7 @@ class GoogleScholarScraper:
             logger.info(f"설정된 최대 페이지 수: {pages_to_search} (모든 가능한 결과를 수집 후 정렬)")
             
             empty_page_count = 0  # 연속으로 빈 페이지 카운트
+            timeout_count = 0     # 연속 타임아웃 횟수
             
             # 수정: max_results에 상관없이 지정된 max_pages까지 모든 페이지 탐색
             while page < pages_to_search:
@@ -78,7 +80,11 @@ class GoogleScholarScraper:
                 browser.get(search_url)
                 
                 # 검색 지연 시간을 늘려 IP 차단 방지
-                self.browser_manager.random_delay(settings.SEARCH_DELAY, settings.SEARCH_DELAY + 2)
+                # 현재 페이지에 따라 지연 시간 점진적 증가
+                delay_factor = min(1 + (page // 10) * 0.5, 3)  # 페이지가 많을수록 대기 시간 증가 (최대 3배)
+                delay_min = settings.SEARCH_DELAY * delay_factor
+                delay_max = delay_min + 2
+                self.browser_manager.random_delay(delay_min, delay_max)
                 
                 # 캡챠 확인
                 if self._check_captcha(browser):
@@ -86,73 +92,106 @@ class GoogleScholarScraper:
                     break
                 
                 # 페이지 파싱
-                try:
-                    WebDriverWait(browser, 10).until(
-                        EC.presence_of_element_located((By.ID, "gs_res_ccl"))
-                    )
-                    
-                    # 페이지 내용 파싱
-                    page_source = browser.page_source
-                    soup = BeautifulSoup(page_source, 'html.parser')
-                    
-                    # 논문 항목 추출
-                    paper_items = soup.select('div.gs_r.gs_or.gs_scl')
-                    
-                    if not paper_items:
-                        logger.debug(f"결과 없음 (페이지 {page+1})")
-                        empty_page_count += 1
+                retry_count = 0
+                max_retries = 3
+                timeout_value = 20  # 타임아웃 값 증가 (초)
+                
+                while retry_count < max_retries:
+                    try:
+                        # 타임아웃 값 증가
+                        WebDriverWait(browser, timeout_value).until(
+                            EC.presence_of_element_located((By.ID, "gs_res_ccl"))
+                        )
                         
-                        # 연속으로 3번 빈 페이지가 나오면 종료 (Google이 더 이상 결과를 제공하지 않음)
-                        if empty_page_count >= 3:
-                            logger.info("연속 3번 빈 페이지 발생. 더 이상 결과가 없는 것으로 판단하여 검색 종료")
-                            break
+                        # 성공하면 타임아웃 카운트 초기화
+                        timeout_count = 0
+                        
+                        # 페이지 내용 파싱
+                        page_source = browser.page_source
+                        soup = BeautifulSoup(page_source, 'html.parser')
+                        
+                        # 논문 항목 추출
+                        paper_items = soup.select('div.gs_r.gs_or.gs_scl')
+                        
+                        if not paper_items:
+                            logger.debug(f"결과 없음 (페이지 {page+1})")
+                            empty_page_count += 1
+                            
+                            # 연속으로 3번 빈 페이지가 나오면 종료 (Google이 더 이상 결과를 제공하지 않음)
+                            if empty_page_count >= 3:
+                                logger.info("연속 3번 빈 페이지 발생. 더 이상 결과가 없는 것으로 판단하여 검색 종료")
+                                break
+                            
+                            page += 1
+                            break  # 재시도 루프 종료
+                        else:
+                            # 결과가 있으면 빈 페이지 카운트 초기화
+                            empty_page_count = 0
+                        
+                        # 각 논문 정보 추출
+                        for item in paper_items:
+                            paper_data = self._parse_paper_item(item)
+                            if paper_data:
+                                # 논문 연도 필터링 추가 검증
+                                paper_year = paper_data.get('publication_year')
+                                year_match = True
+                                
+                                # 추가 필터링: 스크래핑된 결과도 연도 조건을 적용
+                                if paper_year and year_from and paper_year < year_from:
+                                    year_match = False
+                                    logger.debug(f"연도 필터 미달: {paper_data['title']} ({paper_year} < {year_from})")
+                                
+                                if paper_year and year_to and paper_year > year_to:
+                                    year_match = False
+                                    logger.debug(f"연도 필터 초과: {paper_data['title']} ({paper_year} > {year_to})")
+                                
+                                # 필터링 통과한 논문만 추가
+                                if year_match:
+                                    # 중복 검사 (제목 기준)
+                                    if not any(p['title'] == paper_data['title'] for p in all_papers):
+                                        all_papers.append(paper_data)
+                                        logger.debug(f"추출된 논문: {paper_data['title'][:50]}... (인용 수: {paper_data['citation_count']}, 연도: {paper_year})")
+                        
+                        # 진행 상황 출력
+                        if page % 5 == 0:
+                            logger.info(f"현재까지 {len(all_papers)}개 논문 추출됨 (페이지 {page+1})")
+                        
+                        # User-Agent 회전 (설정된 경우)
+                        if settings.USER_AGENT_ROTATION:
+                            self.browser_manager.rotate_user_agent()
                         
                         page += 1
-                        continue
-                    else:
-                        # 결과가 있으면 빈 페이지 카운트 초기화
-                        empty_page_count = 0
-                    
-                    # 각 논문 정보 추출
-                    for item in paper_items:
-                        paper_data = self._parse_paper_item(item)
-                        if paper_data:
-                            # 논문 연도 필터링 추가 검증
-                            paper_year = paper_data.get('publication_year')
-                            year_match = True
+                        break  # 성공적으로 페이지를 파싱했으므로 재시도 루프 종료
+                        
+                    except TimeoutException:
+                        retry_count += 1
+                        timeout_count += 1
+                        
+                        if retry_count >= max_retries:
+                            logger.error(f"페이지 로딩 타임아웃 (최대 재시도 횟수 초과): 페이지 {page+1}")
                             
-                            # 추가 필터링: 스크래핑된 결과도 연도 조건을 적용
-                            if paper_year and year_from and paper_year < year_from:
-                                year_match = False
-                                logger.debug(f"연도 필터 미달: {paper_data['title']} ({paper_year} < {year_from})")
+                            # 여러 번 연속으로 타임아웃이 발생하면 검색 종료
+                            if timeout_count >= 5:
+                                logger.error("연속 5번 타임아웃 발생. Google Scholar에서 차단된 것으로 판단하여 검색 종료")
+                                return all_papers  # 현재까지 수집된 결과 반환
                             
-                            if paper_year and year_to and paper_year > year_to:
-                                year_match = False
-                                logger.debug(f"연도 필터 초과: {paper_data['title']} ({paper_year} > {year_to})")
+                            # 타임아웃 후에도 다음 페이지로 이동 시도
+                            page += 1
+                            break
+                        
+                        # 지수 백오프 적용 (재시도 간 대기 시간 증가)
+                        backoff_time = (2 ** retry_count) * random.uniform(5, 10)
+                        logger.warning(f"페이지 {page+1} 로딩 타임아웃, {retry_count}/{max_retries} 재시도 중... {backoff_time:.1f}초 후 다시 시도")
+                        time.sleep(backoff_time)
+                        
+                        # 재시도 시 새로운 User-Agent 사용
+                        if settings.USER_AGENT_ROTATION:
+                            self.browser_manager.rotate_user_agent()
                             
-                            # 필터링 통과한 논문만 추가
-                            if year_match:
-                                # 중복 검사 (제목 기준)
-                                if not any(p['title'] == paper_data['title'] for p in all_papers):
-                                    all_papers.append(paper_data)
-                                    logger.debug(f"추출된 논문: {paper_data['title'][:50]}... (인용 수: {paper_data['citation_count']}, 연도: {paper_year})")
-                    
-                    # 진행 상황 출력
-                    if page % 5 == 0:
-                        logger.info(f"현재까지 {len(all_papers)}개 논문 추출됨 (페이지 {page+1})")
-                    
-                    # User-Agent 회전 (설정된 경우)
-                    if settings.USER_AGENT_ROTATION:
-                        self.browser_manager.rotate_user_agent()
-                    
-                    page += 1
-                    
-                except TimeoutException:
-                    logger.error("페이지 로딩 타임아웃")
-                    break
-                except Exception as e:
-                    logger.error(f"검색 중 오류 발생: {str(e)}")
-                    break
+                    except Exception as e:
+                        logger.error(f"검색 중 오류 발생: {str(e)}")
+                        page += 1
+                        break
             
             logger.info(f"검색 완료: 총 {len(all_papers)}개 논문 수집됨")
             

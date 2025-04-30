@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     
     # Google Scholar 설정
     GOOGLE_SCHOLAR_URL: str = "https://scholar.google.com"
-    SEARCH_DELAY: int = 5  # 검색 요청 간 지연 시간 (초)
+    SEARCH_DELAY: int = 8  # 검색 요청 간 지연 시간 (초) - 타임아웃 방지를 위해 값 증가
     MAX_PAGE_COUNT: int = 100  # 최대 페이지 수
     USER_AGENT_ROTATION: bool = True  # User-Agent 회전 사용 여부
     

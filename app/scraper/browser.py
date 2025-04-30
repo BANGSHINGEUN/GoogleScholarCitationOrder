@@ -13,12 +13,32 @@ from fake_useragent import UserAgent
 from app.core.config import settings
 from app.core.logging import logger
 
+# 다양한 일반적인 User-Agent 리스트 (fake_useragent 라이브러리가 실패할 경우를 대비)
+COMMON_USER_AGENTS = [
+    # Chrome
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    # Firefox
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:124.0) Gecko/20100101 Firefox/124.0",
+    "Mozilla/5.0 (X11; Linux x86_64; rv:124.0) Gecko/20100101 Firefox/124.0",
+    # Safari
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15",
+    # Edge
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+]
+
 class BrowserManager:
     """Selenium 브라우저 관리 클래스"""
     
     def __init__(self):
         self.browser = None
-        self.user_agent = UserAgent() if settings.USER_AGENT_ROTATION else None
+        try:
+            self.user_agent = UserAgent() if settings.USER_AGENT_ROTATION else None
+        except Exception as e:
+            logger.warning(f"User-Agent 생성 오류: {str(e)}. 기본 User-Agent 목록을 사용합니다.")
+            self.user_agent = None
     
     def get_browser(self):
         """설정된 옵션에 따라 Selenium 브라우저 인스턴스 반환"""
@@ -81,7 +101,23 @@ class BrowserManager:
         
         # User-Agent 설정
         if self.user_agent:
-            options.add_argument(f"--user-agent={self.user_agent.random}")
+            try:
+                user_agent_str = self.user_agent.random
+                options.add_argument(f"--user-agent={user_agent_str}")
+                logger.debug(f"User-Agent 설정: {user_agent_str}")
+            except Exception as e:
+                logger.warning(f"User-Agent 설정 오류: {str(e)}. 랜덤 기본 User-Agent를 사용합니다.")
+                random_ua = random.choice(COMMON_USER_AGENTS)
+                options.add_argument(f"--user-agent={random_ua}")
+                logger.debug(f"기본 User-Agent 설정: {random_ua}")
+        
+        # 구글 봇 감지 회피를 위한 추가 설정
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option("useAutomationExtension", False)
+        
+        # 웹사이트가 자동화 감지하지 못하도록 navigator.webdriver 플래그 수정
+        options.add_argument("--disable-blink-features")
         
         # 기타 보안 설정
         options.add_argument("--disable-extensions")
@@ -126,6 +162,16 @@ class BrowserManager:
             # ChromeDriver 서비스 생성 및 브라우저 인스턴스 생성
             service = Service(executable_path=driver_path)
             browser = webdriver.Chrome(service=service, options=options)
+            
+            # navigator.webdriver를 숨기기 위한 JavaScript 실행
+            browser.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {
+                'source': '''
+                    Object.defineProperty(navigator, 'webdriver', {
+                        get: () => undefined
+                    })
+                '''
+            })
+            
             logger.debug("Chrome 브라우저 인스턴스 생성 완료")
             return browser
         except Exception as e:
@@ -145,12 +191,19 @@ class BrowserManager:
     
     def rotate_user_agent(self):
         """User-Agent 변경"""
-        if not self.user_agent or not self.browser:
+        if not self.browser:
             return
         
-        new_user_agent = self.user_agent.random
-        self.browser.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": new_user_agent})
-        logger.debug(f"User-Agent 변경: {new_user_agent}")
+        try:
+            if self.user_agent:
+                new_user_agent = self.user_agent.random
+            else:
+                new_user_agent = random.choice(COMMON_USER_AGENTS)
+                
+            self.browser.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": new_user_agent})
+            logger.debug(f"User-Agent 변경: {new_user_agent}")
+        except Exception as e:
+            logger.warning(f"User-Agent 변경 오류: {str(e)}")
     
     def random_delay(self, min_seconds=1, max_seconds=3):
         """랜덤한 지연 시간 추가 (IP 차단 방지)"""
